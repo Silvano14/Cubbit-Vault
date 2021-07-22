@@ -32,6 +32,8 @@ export const Input = () => {
         }}>
             <Icon svg={Divider} style={{}} />
         </div>
-        <input className='input-file' />
+        {/* In this way you avoid showing the writing for the choice of the file */}
+        <input type="file" id="selectedFile" style={{ display: 'none' }} />
+        <input className='input-file' readOnly id='input' onClick={() => document.getElementById('selectedFile')?.click()} />
     </Fragment >
 }
