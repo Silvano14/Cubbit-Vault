@@ -1,0 +1,9 @@
+.container-drag {
+    background-color: #FFA047;
+    height: 216px;
+    width: 936px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
