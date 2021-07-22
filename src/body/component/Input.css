@@ -3,4 +3,11 @@
     height: 48px;
     background: #FFFFFF;
     border-radius: 3px;
+    border: 0;
+}
+
+.arrow-down {
+    position: absolute;
+    right: 350px;
+    top: 69px;
 }

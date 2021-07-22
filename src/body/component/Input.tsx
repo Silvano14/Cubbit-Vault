@@ -1,22 +1,37 @@
-import React, { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import React, { Fragment } from 'react';
+import ArrowDown from '../../icon/ArrowDown.svg';
+import Divider from '../../icon/Divider.svg';
+import FileLogo from '../../icon/File-logo.svg';
+import { Icon } from '../../util/Icon';
 import './Input.css';
 
-export const Input = () => {
-    // return (<input className='input-file'></input>)
-    const onDrop = useCallback(acceptedFiles => {
-        console.log(acceptedFiles);
-    }, [])
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    return (
-        <div {...getRootProps()} className='input-file'>
-            <input {...getInputProps()} />
-            {
-                isDragActive ?
-                    <p>Drop the files here ...</p> :
-                    <p>Drag 'n' drop some files here, or click to select files</p>
-            }
+export const Input = () => {
+    const commonStyleDiv: React.CSSProperties = { position: 'absolute' }
+    return <Fragment>
+        <div style={{
+            ...commonStyleDiv,
+            right: '571px',
+            top: '66px'
+        }}>
+            <Icon svg={FileLogo} style={{
+                width: '22px',
+                right: '160px',
+                top: '10px'
+            }} />
+        </div >
+        <div style={{
+            ...commonStyleDiv,
+            right: '350px',
+            top: '69px'
+        }} ><Icon svg={ArrowDown} style={{}} /></div>
+        <div style={{
+            ...commonStyleDiv,
+            right: '377px',
+            top: '56px'
+        }}>
+            <Icon svg={Divider} style={{}} />
         </div>
-    )
+        <input className='input-file' />
+    </Fragment >
 }

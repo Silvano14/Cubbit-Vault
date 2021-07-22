@@ -1,9 +1,8 @@
 import React from 'react';
-import { DropBackground } from './DropBackground';
-import './DropZone.css'
+import { DropFiles } from './DropFiles';
+import './DropZone.css';
 
-export const DropZone = () => {
-    return <div className='container-drag'>
-        <DropBackground />
+export const DropZone = () =>
+    <div className='container-drag'>
+        <DropFiles />
     </div>
-}
