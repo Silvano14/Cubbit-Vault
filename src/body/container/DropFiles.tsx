@@ -10,7 +10,7 @@ export const DropFiles = () => {
     const [fileName, setFileName] = useState();
     const [isDropped, setIfDropped] = useState(false);
 
-    const handleDrop = (e: { preventDefault: () => void; dataTransfer: { files: any[]; }; stopPropagation: () => void; }) => {
+    const handleDrop = (e: any) => {
         e.preventDefault();
         if (e.dataTransfer.files.length) {
             setIfDropped(true);
@@ -28,10 +28,24 @@ export const DropFiles = () => {
             e.stopPropagation();
         }
     };
+    const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
 
     return <div className='drag-and-drop-container'
         onDrop={(e: any) => handleDrop(e)}
-    >
+        onDragOver={e => handleDragOver(e)}
+        onDragEnter={e => handleDragEnter(e)}
+        onDragLeave={e => handleDragLeave(e)}>
         {isDropped ?
             <div className='file-dropped'>
                 <Icon svg={FileLogo} style={{ alignSelf: 'center' }} />
