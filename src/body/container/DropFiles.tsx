@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { useEffect } from 'react';
 import FileLogo from '../../icon/File-logo.svg';
 import { Icon } from '../../util/Icon';
 import { Input } from '../component/Input';
@@ -7,15 +8,22 @@ import './DropFiles.css';
 
 export const DropFiles = () => {
 
-    const [fileName, setFileName] = useState();
-    const [isDropped, setIfDropped] = useState(false);
+    const [file, setFile] = useState<File>();
+    const [isDropped, setIfDropped] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (file) {
+            //send file by post 
+            console.log("sending...");
+        }
+    }, [file])
 
     const handleDrop = (e: any) => {
         e.preventDefault();
         if (e.dataTransfer.files.length) {
-            setIfDropped(true);
             const file = e.dataTransfer.files[0];
-            setFileName(file.name);
+            setIfDropped(true);
+            setFile(file);
 
             const reader = new FileReader();
             reader.onload = function (event) {
@@ -23,11 +31,12 @@ export const DropFiles = () => {
                     console.log(event.target.result);
                 }
             };
-            console.log(file);
             reader.readAsText(file);
             e.stopPropagation();
         }
     };
+
+    // You need these methods otherwise the browser opens the file in a new tab
     const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
@@ -49,11 +58,12 @@ export const DropFiles = () => {
         {isDropped ?
             <div className='file-dropped'>
                 <Icon svg={FileLogo} style={{ alignSelf: 'center' }} />
-                <p>{fileName}</p>
+                <p>{file ? file.name : ""}</p>
             </div> :
             (<Fragment>
-                <Input />
+                <Input setIfDropped={setIfDropped} setFile={setFile} />
                 <p>or drop file here</p>
-            </Fragment>)}
+            </Fragment>)
+        }
     </div>
 }
