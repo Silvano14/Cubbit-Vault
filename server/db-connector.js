@@ -1,3 +1,4 @@
+const DB_COONNECTION = require('./const');
 const fastifyPlugin = require('fastify-plugin')
 const MongoClient = require('mongodb').MongoClient
 
