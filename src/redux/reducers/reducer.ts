@@ -1,22 +1,21 @@
 //import action types that are required by the reducer 
-import { CREATE, READ, UPDATE, DELETE, updateItem } from '../actions/action';
+import { CREATE, DELETE, READ, UPDATE } from '../actions/action';
 
-type initialS = {
-
-}
 //initial state for redux store
 const initialState = {
-    menuItems: <any>[]
+    menuItems: [] as any
 }
 
 //reducer function
-export default function (state = initialState, action: any) {
+export const reducer = (state = initialState, action: any) => {
     switch (action.type) {
 
         //handless creation of data
-        case CREATE: return {
-            menuItems: [...state.menuItems, action.payload.item]
-        };
+        case CREATE:
+            console.log("item..", action.payload.item);
+            return {
+                menuItems: [...state.menuItems, action.payload.item]
+            };
 
         //reads all the data from the store
         case READ: return state;

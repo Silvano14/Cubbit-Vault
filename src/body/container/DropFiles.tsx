@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import FileLogo from '../../icon/File-logo.svg';
+import { CREATE } from '../../redux/actions/action';
 import { Icon } from '../../util/Icon';
 import { Input } from '../component/Input';
 import './DropFiles.css';
@@ -10,13 +12,15 @@ export const DropFiles = () => {
 
     const [file, setFile] = useState<File>();
     const [isDropped, setIfDropped] = useState<boolean>(false);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (file) {
             //send file by post 
-            console.log("sending...");
+            console.log("sending...", file.name);
+            dispatch({ type: CREATE, payload: { item: file } })
         }
-    }, [file])
+    }, [file, dispatch])
 
     const handleDrop = (e: any) => {
         e.preventDefault();
@@ -26,11 +30,11 @@ export const DropFiles = () => {
             setFile(file);
 
             const reader = new FileReader();
-            reader.onload = function (event) {
-                if (event != null && event.target != null) {
-                    console.log(event.target.result);
-                }
-            };
+            // reader.onload = function (event) {
+            //     if (event != null && event.target != null) {
+            //         console.log(event.target.result);
+            //     }
+            // };
             reader.readAsText(file);
             e.stopPropagation();
         }
