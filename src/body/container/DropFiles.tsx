@@ -23,16 +23,8 @@ const sendFile = (obj: { contentFile: string | ArrayBuffer; fileName: string; })
         method: 'post',
         url: "http://localhost:3001/",
         headers: {},
-        data: { content: "ciao", fileName: "filename" }
+        data: { content: obj.contentFile, fileName: obj.fileName }
     });
-
-    // axios.post("http://localhost:3001/", { content: "ciao", fileName: "filename" })
-    //     .then(function (response) {
-    //         console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });;
 }
 
 export const DropFiles = () => {

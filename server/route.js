@@ -1,9 +1,11 @@
 const DB_COONNECTION = require('./const');
 const MongoClient = require('mongodb').MongoClient
 
+
 async function routes(fastify, options) {
 
     fastify.post('/', async (request, reply) => {
+
         const mongodb = require('mongodb')
         MongoClient.connect(DB_COONNECTION, function (err, db) {
             if (err) throw err;
