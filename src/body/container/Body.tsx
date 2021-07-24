@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { DropZone } from './DropZone';
 import './Body.css';
 import { Button, buttonProps } from '../../util/Button';
+import { initialState, reducer } from '../../redux/reducers/reducer';
 
 export const Body = () => {
+
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const commonBtnStyle: React.CSSProperties = {
         fontFamily: 'Nunito',

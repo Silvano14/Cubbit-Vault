@@ -2,7 +2,7 @@
 import { CREATE, DELETE, READ, UPDATE } from '../actions/action';
 
 //initial state for redux store
-const initialState = {
+export const initialState = {
     menuItems: [] as any
 }
 
