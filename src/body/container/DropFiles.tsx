@@ -1,30 +1,35 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import FileLogo from '../../icon/File-logo.svg';
 import { Icon } from '../../util/Icon';
 import { Input } from '../component/Input';
 import './DropFiles.css';
 
-const readerFile = (file: File) => {
-    const fileName = file.name;
+const webServerDomain = "http://localhost:3001/upload";
+
+type FileProp = {
+    content: string | ArrayBuffer,
+    fileName: string,
+    size: number,
+}
+
+const sendRequest = async (fileToSend: FileProp) =>
+    axios.post(webServerDomain, { ...fileToSend })
+        .then((e) => console.log(e.data))
+        .catch((e) => console.log("Errore durante la http request: ", e))
+
+const sendFile = (file: File, dispatch: Dispatch<any> | undefined) => {
     const reader = new FileReader();
+    let fileToSend: FileProp;
     reader.onload = function (event) {
         if (event != null && event.target != null && event.target.result != null) {
-            sendFile({ contentFile: event.target.result, fileName });
+            fileToSend = ({ content: event.target.result, fileName: file.name, size: file.size });
+            sendRequest(fileToSend);
         }
     };
     reader.readAsText(file);
-}
-
-const sendFile = (obj: { contentFile: string | ArrayBuffer; fileName: string; }) => {
-
-    axios({
-        method: 'post',
-        url: "http://localhost:3001/",
-        headers: {},
-        data: { content: obj.contentFile, fileName: obj.fileName }
-    });
 }
 
 export const DropFiles = () => {
@@ -35,7 +40,7 @@ export const DropFiles = () => {
 
     useEffect(() => {
         if (file) {
-            readerFile(file);
+            sendFile(file, dispatch);
         }
     }, [file, dispatch])
 
@@ -45,7 +50,6 @@ export const DropFiles = () => {
             const file = e.dataTransfer.files[0];
             setIfDropped(true);
             setFile(file);
-
 
             e.stopPropagation();
         }
@@ -82,3 +86,4 @@ export const DropFiles = () => {
         }
     </div>
 }
+
