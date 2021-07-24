@@ -1,12 +1,39 @@
-import React, { Fragment, useState } from 'react';
-import { useEffect } from 'react';
+import axios from 'axios';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FileLogo from '../../icon/File-logo.svg';
-import { CREATE } from '../../redux/actions/action';
 import { Icon } from '../../util/Icon';
 import { Input } from '../component/Input';
 import './DropFiles.css';
 
+const readerFile = (file: File) => {
+    const fileName = file.name;
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        if (event != null && event.target != null && event.target.result != null) {
+            sendFile({ contentFile: event.target.result, fileName });
+        }
+    };
+    reader.readAsText(file);
+}
+
+const sendFile = (obj: { contentFile: string | ArrayBuffer; fileName: string; }) => {
+
+    axios({
+        method: 'post',
+        url: "http://localhost:3001/",
+        headers: {},
+        data: { content: "ciao", fileName: "filename" }
+    });
+
+    // axios.post("http://localhost:3001/", { content: "ciao", fileName: "filename" })
+    //     .then(function (response) {
+    //         console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });;
+}
 
 export const DropFiles = () => {
 
@@ -16,9 +43,7 @@ export const DropFiles = () => {
 
     useEffect(() => {
         if (file) {
-            //send file by post 
-            console.log("sending...", file.name);
-            dispatch({ type: CREATE, payload: { item: file } })
+            readerFile(file);
         }
     }, [file, dispatch])
 
@@ -29,13 +54,7 @@ export const DropFiles = () => {
             setIfDropped(true);
             setFile(file);
 
-            const reader = new FileReader();
-            // reader.onload = function (event) {
-            //     if (event != null && event.target != null) {
-            //         console.log(event.target.result);
-            //     }
-            // };
-            reader.readAsText(file);
+
             e.stopPropagation();
         }
     };

@@ -5,9 +5,14 @@ const fastify = require('fastify')({
 })
 
 fastify.register(require('./db-connector'), {
-    url: DB_COONNECTION
+    url: DB_COONNECTION,
 })
+
 fastify.register(require('./route'))
+
+fastify.register(require('fastify-cors'), {
+    origin: false
+})
 
 fastify.listen(3001, function (err, address) {
     if (err) {
