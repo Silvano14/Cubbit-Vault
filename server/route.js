@@ -8,6 +8,9 @@ async function routes(fastify, options) {
     const key = uuidv4();
     var cipher = aes256.createCipher(key);
 
+    const database = fastify.mongo.db('files')
+    const collection = database.collection('files')
+
     fastify.post('/upload', async (request, reply) => {
 
         const mongodb = require('mongodb')
@@ -29,6 +32,15 @@ async function routes(fastify, options) {
         });
         return { id, key };
     })
+
+    fastify.get('/download/:id', async (request, reply) => {
+        const mongodb = require('mongodb')
+        let asd;
+        MongoClient.connect(DB_COONNECTION, async function (err, db) {
+            const result = await collection.findOne({ _id: request.params.id })
+            reply.send(result);
+        })
+    });
 }
 
 module.exports = routes

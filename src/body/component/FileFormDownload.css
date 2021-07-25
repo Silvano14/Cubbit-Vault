@@ -1,0 +1,26 @@
+.lbl {
+    padding-right: 13px;
+    color: white;
+}
+
+.container-encryption-key>.input {
+    width: 320px;
+    height: 30px;
+    margin-top: 7px;
+}
+
+.container-encryption-key {
+    display: flex;
+    flex-direction: column;
+    padding-top: 62px;
+    padding-bottom: 35px;
+    align-items: center;
+}
+
+.container-input-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}

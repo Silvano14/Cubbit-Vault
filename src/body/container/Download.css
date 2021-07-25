@@ -1,0 +1,9 @@
+.container-download {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.container-download>label {
+    color: red;
+}

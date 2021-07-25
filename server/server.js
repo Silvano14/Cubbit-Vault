@@ -7,13 +7,15 @@ const fastify = require('fastify')({
 
 fastify.register(require('fastify-cors'), {
     origin: (origin, cb) => {
-        if (/localhost/.test(origin)) {
-            //  Request from localhost will pass
-            cb(null, true)
-            return
-        }
-        // Generate an error on other origins, disabling access
-        cb(new Error("Not allowed"))
+        // if (/localhost/.test(origin)) {
+        //     //  Request from localhost will pass
+        //     cb(null, true)
+        //     return
+        // }
+        // // Generate an error on other origins, disabling access
+        // cb(new Error("Not allowed"))
+        cb(null, true)
+        return;
     }
 })
 

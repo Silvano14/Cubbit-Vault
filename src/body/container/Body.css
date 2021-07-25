@@ -1,13 +1,14 @@
-.container-body{
-   background-color: black;
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+.container-body {
+   background-color: #161616;
    height: 100%;
    display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items:center ;
+   align-items: center;
 }
 
-.container-button-actions{
+.container-button-actions {
    display: flex;
    flex-direction: row;
    margin-top: 48px;

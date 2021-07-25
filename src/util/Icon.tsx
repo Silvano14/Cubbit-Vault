@@ -6,4 +6,4 @@ export type IconProp = {
 }
 
 export const Icon = ({ svg, style }: IconProp) =>
-    <img alt={"asd"} src={svg} style={style} />
+    <img alt={""} src={svg} style={style} />

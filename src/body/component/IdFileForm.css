@@ -1,0 +1,17 @@
+.container-get-file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-get-file>label {
+    color: white;
+}
+
+.container-get-file>button {
+    margin-top: 35px;
+}
+
+.container-get-file>.input {
+    padding-right: 0;
+}

@@ -8,7 +8,7 @@ import { Icon } from '../../util/Icon';
 import { Input } from '../component/Input';
 import './DropFiles.css';
 
-const webServerDomain = "http://localhost:3001/upload";
+export const webServerDomain = "http://localhost:3001";
 
 export const DropFiles = () => {
     const [file, setFile] = useState<File>();
@@ -24,7 +24,7 @@ export const DropFiles = () => {
     };
 
     const sendRequest = async (fileToSend: FileProp) =>
-        axios.post(webServerDomain, { ...fileToSend })
+        axios.post(`${webServerDomain}/upload`, { ...fileToSend })
             .then((e: any) => dispatch({ type: UPDATE, payload: { fileName: fileToSend.fileName, id: e.data.id, key: e.data.key } }))
             .catch((e) => console.log("Error during the http request: ", e))
 

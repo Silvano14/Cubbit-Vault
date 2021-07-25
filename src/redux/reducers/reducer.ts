@@ -1,4 +1,4 @@
-import { REMOVE, SAVE, UPDATE, UPLOAD } from '../actions/action';
+import { DOWNLOAD, REMOVE, SAVE, UPDATE, UPLOAD } from '../actions/action';
 
 export type FileProp = {
     content: string | ArrayBuffer,
@@ -7,6 +7,7 @@ export type FileProp = {
     toSend?: boolean
     key?: string
     id?: string
+
 }
 
 export type State = Array<FileProp>
@@ -42,6 +43,10 @@ export const reducer = (state = initialState, action: any): any => {
         case REMOVE: {
             delete state[0]
             return state;
+        }
+
+        case DOWNLOAD: {
+            return { ...state, download: true };
         }
 
         //returns default state, in case some unknown action type is discovered
