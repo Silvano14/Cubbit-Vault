@@ -1,0 +1,9 @@
+.container-data-file {
+    Width: 552px;
+    Height: 120px;
+    border: 1px solid #363636;
+    box-sizing: border-box;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+}

@@ -10,6 +10,7 @@ docker run \
 --name mongodb \
 --network vault-net \
 -v $PWD/mongodb/data:/data/db \
+--rm \
 mongo
 
 echo "Creating images for cubbit-vault.."
@@ -24,5 +25,6 @@ docker run \
 -p 3001:3001 \
 --ip 172.18.0.3 \
 --network vault-net \
+--rm \
 cubbit \
 yarn start-app

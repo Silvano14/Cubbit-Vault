@@ -6,19 +6,11 @@ import { Icon } from '../../util/Icon';
 import './Input.css';
 
 type InputProps = {
-    setIfDropped: Dispatch<SetStateAction<boolean>>
     setFile: Dispatch<SetStateAction<File | undefined>>
 }
 
-export const Input = ({ setIfDropped, setFile }: InputProps) => {
+export const Input = ({ setFile }: InputProps) => {
     const commonStyleDiv: React.CSSProperties = { position: 'absolute' }
-
-    const setUpFilesParams = (e: any) => {
-        if (e.length) {
-            setFile(e[0]);
-            setIfDropped(true);
-        }
-    }
 
     return <Fragment>
         <div style={{
@@ -45,7 +37,7 @@ export const Input = ({ setIfDropped, setFile }: InputProps) => {
             <Icon svg={Divider} style={{}} />
         </div>
         {/* In this way you avoid showing the writing for the choice of the file */}
-        <input type="file" id="selectedFile" style={{ display: 'none' }} onChange={(e) => setUpFilesParams(e.target.files)} />
+        <input type="file" id="selectedFile" style={{ display: 'none' }} onChange={(e) => setFile(e.target.files ? e.target.files[0] : undefined)} />
         <input className='input-file' id='input' onClick={() => document.getElementById('selectedFile')?.click()} />
     </Fragment >
 }

@@ -1,12 +1,29 @@
-import React, { useReducer } from 'react';
-import { DropZone } from './DropZone';
-import './Body.css';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { UPLOAD } from '../../redux/actions/action';
+import { FileProp } from '../../redux/reducers/reducer';
 import { Button, buttonProps } from '../../util/Button';
-import { initialState, reducer } from '../../redux/reducers/reducer';
+import './Body.css';
+import { DataFileSent } from './DataFileSent';
+import { DropZone } from './DropZone';
 
 export const Body = () => {
+    const [showFileProps, setShowFileProps] = useState<boolean>(false);
+    const currentFile = useSelector((state: Array<FileProp>) => {
+        if (state && state.length) {
+            return state.filter(el => el.toSend === true)[0];
+        }
+        return undefined;
+    });
 
-    const [state, dispatch] = useReducer(reducer, initialState);
+    useEffect(() => {
+        if (currentFile) {
+            console.log("currentFile ", currentFile)
+            setShowFileProps(true);
+        }
+    }, [currentFile, setShowFileProps])
+
+    const dispatch = useDispatch();
 
     const commonBtnStyle: React.CSSProperties = {
         fontFamily: 'Nunito',
@@ -18,7 +35,8 @@ export const Body = () => {
         height: '48px',
         border: 0,
         borderRadius: '3px',
-        color: 'white'
+        color: 'white',
+        cursor: 'pointer'
     }
 
     const encryptBtn: buttonProps = {
@@ -36,11 +54,15 @@ export const Body = () => {
     };
 
     return <div className='container-body'>
-        body
-        <DropZone />
-        <div className='container-button-actions'>
-            <Button {...encryptBtn} />
-            <Button {...decryptBtn} />
-        </div>
+        {showFileProps
+            ? <DataFileSent keyValue={currentFile ? currentFile.key : undefined} id={currentFile ? currentFile.id : undefined} />
+            : <div className='container-body'>
+                <DropZone />
+                <div className='container-button-actions'>
+                    <Button {...encryptBtn} onClick={() => dispatch({ type: UPLOAD })} />
+                    <Button {...decryptBtn} />
+                </div>
+            </div>
+        }
     </div>
 }

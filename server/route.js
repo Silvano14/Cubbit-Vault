@@ -4,8 +4,9 @@ const { v4: uuidv4 } = require('uuid');
 var aes256 = require('aes256');
 
 async function routes(fastify, options) {
-    const uuid = uuidv4();
-    var cipher = aes256.createCipher(uuid);
+    const id = uuidv4();
+    const key = uuidv4();
+    var cipher = aes256.createCipher(key);
 
     fastify.post('/upload', async (request, reply) => {
 
@@ -19,14 +20,14 @@ async function routes(fastify, options) {
                 if (body) {
                     const { content, ...rest } = body;
                     var encryptedPlainText = cipher.encrypt(content);
-                    dbo.collection("files").insertOne({ content: encryptedPlainText, ...rest, _id: uuid }, function (err, res) {
+                    dbo.collection("files").insertOne({ content: encryptedPlainText, ...rest, _id: id }, function (err, res) {
                         if (err) throw err;
                         db.close();
                     });
                 }
             }
         });
-        return { id: uuid };
+        return { id, key };
     })
 }
 

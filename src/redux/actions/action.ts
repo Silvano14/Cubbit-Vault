@@ -1,28 +1,21 @@
 //action types created and exported
-export const CREATE = "Add new item";
-export const READ = "fetch all items";
-export const UPDATE = "update item";
-export const DELETE = "delete item";
+export const UPLOAD = "upload file";
+export const UPDATE = "update file";
+export const SAVE = "save file";
+export const REMOVE = "remove file";
 
-//dispatched when item needs to be created
-export const createItem = (item: any) => ({
-    type: CREATE,
-    payload: { item }
+export const uploadFile = () => ({
+    type: UPLOAD
 })
 
-//dispatched when all the items stored in redux store needs to be read
-export const readItems = () => ({
-    type: READ
+export const saveFile = () => ({
+    type: SAVE
 })
 
-//dispatched when certain item needs to be updated
-export const updateItem = (item: any) => ({
-    type: UPDATE,
-    payload: { item }
+export const removeFile = () => ({
+    type: REMOVE
 })
 
-//dispatched when certain item needs to be removed from redux store 
-export const deleteItem = (id: any) => ({
-    type: DELETE,
-    payload: { id }
+export const updateFile = () => ({
+    type: UPDATE
 })
