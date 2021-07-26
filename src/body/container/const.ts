@@ -1,7 +1,5 @@
-import { buttonProps } from "../../util/Button";
 
 export const commonBtnStyle: React.CSSProperties = {
-    fontFamily: 'Nunito',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '16px',

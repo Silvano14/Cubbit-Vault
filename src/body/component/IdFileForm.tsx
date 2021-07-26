@@ -1,23 +1,20 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { FileProp } from '../../redux/reducers/reducer';
 import { Button } from '../../util/Button';
 import { webServerDomain } from '../container/DropFiles';
-import { FileDownloaded, FileFormDownload, formButtonStyle } from './FileFormDownload';
+import { FileFormDownload, formButtonStyle } from './FileFormDownload';
 import './IdFileForm.css';
 
 export const IdFileForm = () => {
-    const dispatch = useDispatch();
     const [showFileProp, setIfShow] = useState<boolean>(false);
     const [idFile, setIdFile] = useState<string>("");
     const [fileData, setFileData] = useState<any>();
 
-    const sendRequest = async () => {
-        axios.get(`${webServerDomain}/download/${idFile}`)
+    const sendRequest = async () =>
+        axios.get(`${webServerDomain}/find/${idFile}`)
             .then((e) => { setFileData(e.data); setIfShow(true); })
             .catch((e) => console.log("Error during the http request: ", e))
-    }
+
     return (
         <Fragment>
             {showFileProp

@@ -1,5 +1,6 @@
 const DB_COONNECTION = require('./const');
 const cors = require('cors')
+var path = require('path');
 
 const fastify = require('fastify')({
     logger: true
@@ -17,6 +18,10 @@ fastify.register(require('fastify-cors'), {
         cb(null, true)
         return;
     }
+})
+
+fastify.register(require('fastify-static'), {
+    root: path.join(__dirname, '../public'),
 })
 
 fastify.register(require('./db-connector'), {

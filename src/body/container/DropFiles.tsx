@@ -41,13 +41,12 @@ export const DropFiles = () => {
 
     useEffect(() => {
         if (currentFile && currentFile.toSend) {
-            console.log("sending request", currentFile)
             sendRequest(currentFile)
         }
         if (file && !currentFile) {
             readAndSaveFile(file);
         }
-    }, [file, readAndSaveFile, dispatch, currentFile, sendRequest])
+    }, [file, readAndSaveFile, currentFile, sendRequest])
 
     // You need these methods otherwise the browser opens the file in a new tab
     const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
@@ -75,7 +74,7 @@ export const DropFiles = () => {
             </div> :
             (<Fragment>
                 <Input setFile={setFile} />
-                <p>or drop file here</p>
+                <p className="text-drop">or drop file here</p>
             </Fragment>)
         }
     </div>

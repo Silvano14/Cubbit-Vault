@@ -1,5 +1,7 @@
 docker network create --subnet=172.18.0.0/16 vault-net
 echo "Network 172.18.0.0/16 created"
+mkdir -p mongodb/data
+echo "Created the folder where the data is going to be stored"
 echo "Pulling mongo..."
 docker pull mongo
 echo "Mongo are starting at 172.18.0.2:27017..."

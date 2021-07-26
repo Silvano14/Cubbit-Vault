@@ -1,5 +1,4 @@
 import React from 'react';
-import { FileFormDownload } from '../component/FileFormDownload';
 import { IdFileForm } from '../component/IdFileForm';
 import './Download.css';
 

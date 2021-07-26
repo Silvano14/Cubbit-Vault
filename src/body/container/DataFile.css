@@ -5,11 +5,10 @@
     border: 1px solid #363636;
     box-sizing: border-box;
     border-radius: 3px;
-    Width: 552px;
-    Height: 120px;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-top: 20px;
 }
 
 .container-data-file>p {
@@ -19,7 +18,7 @@
     line-height: 26px;
 }
 
-.key {
+.test-key {
     margin: 0;
 }
 
@@ -34,15 +33,17 @@
     border: 1px solid #363636;
     box-sizing: border-box;
     border-radius: 3px;
-    background: #292929;
     height: 48px;
     width: 552px;
     text-overflow: ellipsis;
     padding-left: 30px;
     padding-right: 148px;
+    color: white;
+    font-family: Nunito;
+    font-weight: bold;
 }
 
-.text {
+.text-id, .text-key {
     color: white;
     font-family: Nunito;
 }

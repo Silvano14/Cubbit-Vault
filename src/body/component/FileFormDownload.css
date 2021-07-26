@@ -7,6 +7,9 @@
     width: 320px;
     height: 30px;
     margin-top: 7px;
+    padding: 0;
+    color: white;
+    font-weight: bold;
 }
 
 .container-encryption-key {

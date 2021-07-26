@@ -38,6 +38,6 @@ export const Input = ({ setFile }: InputProps) => {
         </div>
         {/* In this way you avoid showing the writing for the choice of the file */}
         <input type="file" id="selectedFile" style={{ display: 'none' }} onChange={(e) => setFile(e.target.files ? e.target.files[0] : undefined)} />
-        <input className='input-file' id='input' onClick={() => document.getElementById('selectedFile')?.click()} />
+        <input className='input-file' readOnly id='input' onClick={() => document.getElementById('selectedFile')?.click()} />
     </Fragment >
 }

@@ -1,4 +1,4 @@
-import { DOWNLOAD, REMOVE, SAVE, UPDATE, UPLOAD } from '../actions/action';
+import { DOWNLOAD, SAVE, UPDATE, UPLOAD } from '../actions/action';
 
 export type FileProp = {
     content: string | ArrayBuffer,
@@ -37,12 +37,6 @@ export const reducer = (state = initialState, action: any): any => {
             const { id, key } = action.payload;
             return [{ ...state[0], id, key }]
 
-        }
-
-        // //handles item deletion from redux store
-        case REMOVE: {
-            delete state[0]
-            return state;
         }
 
         case DOWNLOAD: {

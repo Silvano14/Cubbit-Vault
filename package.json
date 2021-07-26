@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "cubbit-vault",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,7 @@
     "fastify": "^3.19.2",
     "fastify-cors": "^6.0.2",
     "fastify-mongodb": "^2.0.1",
+    "fastify-static": "^4.2.2",
     "mongodb": "^4.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -28,10 +29,7 @@
   "scripts": {
     "start-app": "concurrently \"yarn fastify\" \"yarn start\"",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "fastify": "node server/server",
-    "eject": "react-scripts eject"
+    "fastify": "node server/server"
   },
   "eslintConfig": {
     "extends": [

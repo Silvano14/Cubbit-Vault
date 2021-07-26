@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
-import { FileProp } from '../../redux/reducers/reducer';
+import axios from 'axios';
+import React, { Fragment, useState } from 'react';
 import { Button } from '../../util/Button';
 import { commonBtnStyle } from '../container/const';
+import { webServerDomain } from '../container/DropFiles';
 import './FileFormDownload.css';
 
 const inputId = "input-id";
 const inputName = "input-name";
 const inputSize = "input-size";
-const InputMime = "input-mime";
 const inputEncryptionKey = "input-encyption-key";
 
 export type FileDownloaded = {
@@ -16,8 +16,15 @@ export type FileDownloaded = {
     id?: string
 }
 
-export const FileFormDownload = ({ fileName, size, id }: FileDownloaded) =>
-    <Fragment>
+export const FileFormDownload = ({ fileName, size, id }: FileDownloaded) => {
+    const [key, setKey] = useState<string>("");
+
+    const sendRequest = async () =>
+        axios.post(`${webServerDomain}/download`, { id, key })
+            .then((e) => console.log(e))
+            .catch((e) => console.log("Error during the http request: ", e))
+
+    return <Fragment>
         <div>
             <label className={"lbl id"} htmlFor={inputId}> File id </label>
             <input className={"input id"} id={inputId} readOnly value={id} />
@@ -30,20 +37,17 @@ export const FileFormDownload = ({ fileName, size, id }: FileDownloaded) =>
             <label className={"lbl size"} htmlFor={inputSize}> File size </label>
             <input className={"input size"} id={inputSize} readOnly value={size} />
         </div>
-        <div>
-            <label className={"lbl mime"} htmlFor={inputId}> File mime </label>
-            <input className={"input mime"} id={InputMime} readOnly value={size} />
-        </div>
         <div className={"container-input-button"}>
             <div className={"container-encryption-key"}>
                 <label className={"lbl key"} htmlFor={inputEncryptionKey}> Insert your encryption key </label>
-                <input className={"input key"} style={{ width: '409px', height: '48px' }} id={inputEncryptionKey} />
+                <input className={"input key"} style={{ width: '409px', height: '48px' }} onChange={(e) => setKey(e.target.value)} id={inputEncryptionKey} />
             </div>
             <div className={"container-btn-decrypt"}>
-                <Button style={formButtonStyle} label={"Decrypt and download"} />
+                <Button style={formButtonStyle} onClick={sendRequest} label={"Decrypt and download"} />
             </div>
         </div>
     </Fragment>
+}
 
 
 export const formButtonStyle = { ...commonBtnStyle, backgroundColor: '#FFA047' }

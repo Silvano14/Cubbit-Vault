@@ -17,7 +17,7 @@ export const DataFile = ({ id, keyValue, fileName }: KeysFile) =>
             <Icon svg={FileLogo} style={{ color: 'white' }} />
             <p> {fileName} </p>
         </div>
-        <p className='text id'> Your file id: </p>
+        <p className='text-id'> Your file id: </p>
         <input readOnly className='input id' value={id} />
         <Button id={"btn-id"} label={'Copy'} style={{
             ...commonBtnStyle,
@@ -31,7 +31,7 @@ export const DataFile = ({ id, keyValue, fileName }: KeysFile) =>
             onClick={(e: any) => {
                 document.getElementById("btn-id")!.innerHTML = "Copied"; navigator.clipboard.writeText(id)
             }} />
-        <p className='text key'> Your encryption key: </p>
+        <p className='text-key'> Your encryption key: </p>
         <Button id={"btn-key"} label={'Copy'} style={{
             ...commonBtnStyle,
             background: '#009EFF',

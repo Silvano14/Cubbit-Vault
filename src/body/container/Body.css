@@ -1,4 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+.p-footer {
+   font-family: Nunito;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 14px;
+   line-height: 23px;
+   color: white;
+   position: fixed;
+   bottom: 0px;
+}
+
+.p-header {
+   font-family: Nunito;
+   font-style: normal;
+   font-weight: 900;
+   font-size: 36px;
+   line-height: 47px;
+   color: white;
+   padding-top: 50px;
+}
+
+button {
+   font-family: 'Nunito',
+}
+
 .container-body {
    background-color: #161616;
    height: 100%;

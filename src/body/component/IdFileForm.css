@@ -6,6 +6,7 @@
 
 .container-get-file>label {
     color: white;
+    padding-bottom: 22px;
 }
 
 .container-get-file>button {

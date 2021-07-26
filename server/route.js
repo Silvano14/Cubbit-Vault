@@ -2,6 +2,8 @@ const DB_COONNECTION = require('./const');
 const MongoClient = require('mongodb').MongoClient
 const { v4: uuidv4 } = require('uuid');
 var aes256 = require('aes256');
+var fs = require('fs');
+var path = require('path');
 
 async function routes(fastify, options) {
     const id = uuidv4();
@@ -11,8 +13,7 @@ async function routes(fastify, options) {
     const database = fastify.mongo.db('files')
     const collection = database.collection('files')
 
-    fastify.post('/upload', async (request, reply) => {
-
+    fastify.post('/upload', (request, reply) => {
         const mongodb = require('mongodb')
         MongoClient.connect(DB_COONNECTION, function (err, db) {
             if (err) throw err;
@@ -21,7 +22,7 @@ async function routes(fastify, options) {
             if (request) {
                 const { body } = request;
                 if (body) {
-                    const { content, ...rest } = body;
+                    const { content, toSend, ...rest } = body;
                     var encryptedPlainText = cipher.encrypt(content);
                     dbo.collection("files").insertOne({ content: encryptedPlainText, ...rest, _id: id }, function (err, res) {
                         if (err) throw err;
@@ -33,14 +34,28 @@ async function routes(fastify, options) {
         return { id, key };
     })
 
-    fastify.get('/download/:id', async (request, reply) => {
+    fastify.get('/find/:id', async (request, reply) => {
         const mongodb = require('mongodb')
-        let asd;
         MongoClient.connect(DB_COONNECTION, async function (err, db) {
             const result = await collection.findOne({ _id: request.params.id })
             reply.send(result);
         })
-    });
+    })
+
+    fastify.post('/download', function (req, reply) {
+        const mongodb = require('mongodb')
+        var cipher = aes256.createCipher(req.body.key);
+
+        MongoClient.connect(DB_COONNECTION, async function (err, db) {
+            const result = await collection.findOne({ _id: req.body.id })
+            fs.writeFile(`public/${result.fileName}`, cipher.decrypt(result.content), function (err) {
+                if (err) throw err;
+            });
+            reply
+                .header('Content-Disposition', `attachment; filename=${result.fileName}`)
+                .sendFile(result.fileName, path.join(__dirname, 'public'));
+        })
+    })
 }
 
 module.exports = routes
