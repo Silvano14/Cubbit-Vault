@@ -23,7 +23,6 @@ export const Body = () => {
     const isDownload = useSelector((state: { download: boolean }) => {
         if (state)
             return state.download;
-
         return false;
     });
 
@@ -44,13 +43,14 @@ export const Body = () => {
                     <DropZone />
                     <div className='container-button-actions'>
                         <Button {...encryptBtn} onClick={() => dispatch({ type: UPLOAD })} />
-                        <Button {...decryptBtn} onClick={() => dispatch({ type: DOWNLOAD })} />
+                        <Button {...decryptBtn} onClick={() => dispatch({ type: DOWNLOAD, payload: true })} />
                     </div>
                 </div>
         }
         <p className={"p-footer"}> q'$=6'.+$=(2=-$5$1=3'$=24,=.%=3'$=/ 132=J=(3=(2=&1$ 3$1=.1=+$22$1I=#$/$-#(-&=.-='.6=6$++=3'$=(-#(5(#4 +2=6.1*=3.&$3'$1</p>
     </div>
 }
+
 const encryptBtn: buttonProps = {
     label: 'Encrypt and upload', style: {
         background: '#009EFF',

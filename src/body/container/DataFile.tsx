@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 import FileLogo from '../../icon/File-logo-white.svg';
+import { DOWNLOAD } from '../../redux/actions/action';
 import { Button } from '../../util/Button';
 import { Icon } from '../../util/Icon';
 import { commonBtnStyle } from './const';
@@ -11,8 +13,10 @@ type KeysFile = {
     fileName: string
 }
 
-export const DataFile = ({ id, keyValue, fileName }: KeysFile) =>
-    <Fragment>
+export const DataFile = ({ id, keyValue, fileName }: KeysFile) => {
+    const dispatch = useDispatch();
+
+    return <Fragment>
         <div className='container-data-file'>
             <Icon svg={FileLogo} style={{ color: 'white' }} />
             <p> {fileName} </p>
@@ -46,4 +50,7 @@ export const DataFile = ({ id, keyValue, fileName }: KeysFile) =>
             }} />
         <input readOnly className='input key' value={keyValue} />
 
+        <Button style={{ ...commonBtnStyle, background: '#009EFF', marginTop: '50px' }} label={"Go to download"} onClick={() => dispatch({ type: DOWNLOAD, payload: true })} />
+
     </Fragment>
+}

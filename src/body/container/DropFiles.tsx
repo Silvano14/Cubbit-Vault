@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FileLogo from '../../icon/File-logo.svg';
 import { SAVE, UPDATE } from '../../redux/actions/action';
@@ -15,7 +15,7 @@ export const DropFiles = () => {
     const dispatch = useDispatch();
     const currentFile = useSelector((state: Array<FileProp>) => state[0]);
 
-    const handleDrop = (e: any) => {
+    const handleDrop = (e: any): void => {
         e.preventDefault();
         if (e.dataTransfer.files.length) {
             setFile(e.dataTransfer.files[0]);
@@ -23,12 +23,14 @@ export const DropFiles = () => {
         e.stopPropagation();
     };
 
-    const sendRequest = async (fileToSend: FileProp) =>
+    const sendRequest = useCallback((fileToSend: FileProp): void => {
         axios.post(`${webServerDomain}/upload`, { ...fileToSend })
             .then((e: any) => dispatch({ type: UPDATE, payload: { fileName: fileToSend.fileName, id: e.data.id, key: e.data.key } }))
             .catch((e) => console.log("Error during the http request: ", e))
+    }, [dispatch]);
 
-    const readAndSaveFile = (file: File): any => {
+
+    const readAndSaveFile = useCallback((file: File): void => {
         const reader = new FileReader();
         reader.onload = function (event) {
             if (event != null && event.target != null && event.target.result != null) {
@@ -37,7 +39,7 @@ export const DropFiles = () => {
             }
         };
         reader.readAsText(file);
-    }
+    }, [dispatch])
 
     useEffect(() => {
         if (currentFile && currentFile.toSend) {

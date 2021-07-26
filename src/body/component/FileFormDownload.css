@@ -12,6 +12,10 @@
     font-weight: bold;
 }
 
+.input-file {
+    padding-left: 30px;
+}
+
 .container-encryption-key {
     display: flex;
     flex-direction: column;

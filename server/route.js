@@ -1,19 +1,18 @@
 const DB_COONNECTION = require('./const');
 const MongoClient = require('mongodb').MongoClient
 const { v4: uuidv4 } = require('uuid');
-var aes256 = require('aes256');
-var fs = require('fs');
-var path = require('path');
+const aes256 = require('aes256');
+const fs = require('fs');
+const path = require('path');
 
 async function routes(fastify, options) {
-    const id = uuidv4();
-    const key = uuidv4();
-    var cipher = aes256.createCipher(key);
-
     const database = fastify.mongo.db('files')
     const collection = database.collection('files')
 
     fastify.post('/upload', (request, reply) => {
+        const id = uuidv4();
+        const key = uuidv4();
+        var cipher = aes256.createCipher(key);
         const mongodb = require('mongodb')
         MongoClient.connect(DB_COONNECTION, function (err, db) {
             if (err) throw err;
@@ -39,6 +38,7 @@ async function routes(fastify, options) {
         MongoClient.connect(DB_COONNECTION, async function (err, db) {
             const result = await collection.findOne({ _id: request.params.id })
             reply.send(result);
+            db.close();
         })
     })
 
@@ -54,6 +54,7 @@ async function routes(fastify, options) {
             reply
                 .header('Content-Disposition', `attachment; filename=${result.fileName}`)
                 .sendFile(result.fileName, path.join(__dirname, 'public'));
+            db.close();
         })
     })
 }
