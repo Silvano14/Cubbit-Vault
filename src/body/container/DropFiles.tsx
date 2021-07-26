@@ -25,10 +25,9 @@ export const DropFiles = () => {
 
     const sendRequest = useCallback((fileToSend: FileProp): void => {
         axios.post(`${webServerDomain}/upload`, { ...fileToSend })
-            .then((e: any) => dispatch({ type: UPDATE, payload: { fileName: fileToSend.fileName, id: e.data.id, key: e.data.key } }))
+            .then((e) => dispatch({ type: UPDATE, payload: { fileName: fileToSend.fileName, id: e.data.id, key: e.data.key } }))
             .catch((e) => console.log("Error during the http request: ", e))
     }, [dispatch]);
-
 
     const readAndSaveFile = useCallback((file: File): void => {
         const reader = new FileReader();
@@ -81,4 +80,3 @@ export const DropFiles = () => {
         }
     </div>
 }
-

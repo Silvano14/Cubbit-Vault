@@ -42,12 +42,12 @@ async function routes(fastify, options) {
         })
     })
 
-    fastify.post('/download', function (req, reply) {
+    fastify.post('/download', (request, reply) => {
         const mongodb = require('mongodb')
-        var cipher = aes256.createCipher(req.body.key);
+        var cipher = aes256.createCipher(request.body.key);
 
         MongoClient.connect(DB_COONNECTION, async function (err, db) {
-            const result = await collection.findOne({ _id: req.body.id })
+            const result = await collection.findOne({ _id: request.body.id })
             fs.writeFile(`public/${result.fileName}`, cipher.decrypt(result.content), function (err) {
                 if (err) throw err;
             });

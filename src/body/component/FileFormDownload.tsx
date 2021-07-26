@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { REMOVE } from '../../redux/actions/action';
 import { Button } from '../../util/Button';
 import { commonBtnStyle } from '../container/const';
 import { webServerDomain } from '../container/DropFiles';
@@ -18,22 +20,25 @@ export type FileDownloaded = {
 
 export const FileFormDownload = ({ fileName, size, id }: FileDownloaded) => {
     const [key, setKey] = useState<string>("");
+    const dispatch = useDispatch();
 
-    const sendRequest = async () =>
+    const sendRequest = async () => {
+        dispatch({ type: REMOVE });
         axios.post(`${webServerDomain}/download`, { id, key })
             .then((e) => console.log(e))
             .catch((e) => console.log("Error during the http request: ", e))
+    }
 
     return <Fragment>
-        <div>
+        <div className={"container file id"}>
             <label className={"lbl id"} htmlFor={inputId}> File id </label>
             <input className={"input id"} id={inputId} readOnly value={id} />
         </div>
-        <div>
+        <div className={"container file name"}>
             <label className={"lbl name"} htmlFor={inputName}> File name </label>
             <input className={"input name"} id={inputName} readOnly value={fileName} />
         </div>
-        <div>
+        <div className={"container file size"}>
             <label className={"lbl size"} htmlFor={inputSize}> File size </label>
             <input className={"input size"} id={inputSize} readOnly value={size} />
         </div>

@@ -17,21 +17,22 @@ export const initialState: State = [];
 export const reducer = (state = initialState, action: any): any => {
     switch (action.type) {
 
+        // Mark the file as "to upload" in the fastify server
         case UPLOAD: {
             if (state && state[0])
                 return [{ ...state[0], toSend: true }]
             return state;
         }
 
-        case REMOVE:
-            return delete state[0]
-
+        // After the saving in the db we delete it
+        case REMOVE: {
+            delete state[0];
+            return state;
+        }
 
         case SAVE: {
-            if (action && action.payload) {
-                if (!state.includes({ ...action.payload, toSend: false }))
-                    return [...state, { ...action.payload, toSend: false }];
-            }
+            if (action && action.payload)
+                return [...state, { ...action.payload, toSend: false }];
             return state;
         }
 

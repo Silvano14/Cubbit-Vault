@@ -16,8 +16,7 @@ export const Body = () => {
     const currentFile = useSelector((state: Array<FileProp>) => {
         if (state && state.length)
             return state.filter(el => el.toSend === true)[0];
-
-        return undefined;
+        return;
     });
 
     const isDownload = useSelector((state: { download: boolean }) => {
@@ -53,14 +52,14 @@ export const Body = () => {
 
 const encryptBtn: buttonProps = {
     label: 'Encrypt and upload', style: {
+        ...commonBtnStyle,
         background: '#009EFF',
         marginRight: '24px',
-        ...commonBtnStyle
     }
 };
 const decryptBtn: buttonProps = {
     label: 'Decrypt and download', style: {
+        ...commonBtnStyle,
         background: '#0065FF',
-        ...commonBtnStyle
     }
 };

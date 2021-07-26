@@ -26,12 +26,12 @@ export const Input = ({ setFile }: InputProps) => {
         </div >
         <div style={{
             ...commonStyleDiv,
-            right: '350px',
+            right: '340px',
             top: '69px'
         }} ><Icon svg={ArrowDown} /></div>
         <div style={{
             ...commonStyleDiv,
-            right: '377px',
+            right: '368px',
             top: '56px'
         }}>
             <Icon svg={Divider} />

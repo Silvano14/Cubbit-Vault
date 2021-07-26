@@ -1,13 +1,14 @@
 .lbl {
     padding-right: 13px;
     color: white;
+    font-family: Nunito;
 }
 
 .container-encryption-key>.input {
     width: 320px;
     height: 30px;
     margin-top: 7px;
-    padding: 0;
+    padding-right: 5px;
     color: white;
     font-weight: bold;
 }
@@ -30,4 +31,8 @@
     align-items: center;
     text-align: center;
     width: 100%;
+}
+
+.container.file {
+    padding-top: 20px;
 }
