@@ -25,8 +25,8 @@ export const DropFiles = () => {
 
     const sendRequest = useCallback((fileToSend: FileProp): void => {
         axios.post(`${webServerDomain}/upload`, { ...fileToSend })
-            .then((e) => dispatch({ type: UPDATE, payload: { fileName: fileToSend.fileName, id: e.data.id, key: e.data.key } }))
-            .catch((e) => console.log("Error during the http request: ", e))
+            .then((e: { data: { id: any; key: any; }; }) => dispatch({ type: UPDATE, payload: { fileName: fileToSend.fileName, id: e.data.id, key: e.data.key } }))
+            .catch((e: any) => console.log("Error during the http request: ", e))
     }, [dispatch]);
 
     const readAndSaveFile = useCallback((file: File): void => {
@@ -65,9 +65,9 @@ export const DropFiles = () => {
 
     return <div className='drag-and-drop-container'
         onDrop={(e: any) => handleDrop(e)}
-        onDragOver={e => handleDragOver(e)}
-        onDragEnter={e => handleDragEnter(e)}
-        onDragLeave={e => handleDragLeave(e)}>
+        onDragOver={(e: any) => handleDragOver(e)}
+        onDragEnter={(e: any) => handleDragEnter(e)}
+        onDragLeave={(e: any) => handleDragLeave(e)}>
         {file ?
             <div className='file-dropped'>
                 <Icon svg={FileLogo} style={{ alignSelf: 'center' }} />

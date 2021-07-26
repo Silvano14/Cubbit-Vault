@@ -4,4 +4,4 @@ COPY yarn.lock package.json tsconfig.json ./
 COPY src src
 COPY server server
 COPY public public
-RUN yarn
+RUN yarn 

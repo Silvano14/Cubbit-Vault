@@ -4,6 +4,13 @@ mkdir -p mongodb/data
 echo "Created the folder where the data is going to be stored"
 echo "Pulling mongo..."
 docker pull mongo
+
+echo "Creating images for cubbit-vault.."
+docker build \
+-t cubbit \
+-f docker/Dockerfile \
+.
+
 echo "Mongo are starting at 172.18.0.2:27017..."
 docker run \
 -d \
@@ -14,12 +21,6 @@ docker run \
 -v $PWD/mongodb/data:/data/db \
 --rm \
 mongo
-
-echo "Creating images for cubbit-vault.."
-docker build \
--t cubbit \
--f docker/Dockerfile \
-.
 
 echo "Running cubbit-vault.."
 docker run \
