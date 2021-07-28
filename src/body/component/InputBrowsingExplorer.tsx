@@ -3,16 +3,17 @@ import ArrowDown from '../../icon/ArrowDown.svg';
 import Divider from '../../icon/Divider.svg';
 import FileLogo from '../../icon/File-logo.svg';
 import { Icon } from '../../util/Icon';
-import './Input.css';
+import { Input } from '../../util/Input';
+import './InputBrowsingExplorer.css';
 
-type InputProps = {
+type InputBrowsingExplorerProps = {
     setFile: Dispatch<SetStateAction<File | undefined>>
 }
 
-export const Input = ({ setFile }: InputProps) => {
-    const commonStyleDiv: React.CSSProperties = { position: 'absolute' }
+const commonStyleDiv: React.CSSProperties = { position: 'absolute' }
 
-    return <Fragment>
+export const InputBrowsingExplorer = ({ setFile }: InputBrowsingExplorerProps) =>
+    <Fragment>
         <div style={{
             ...commonStyleDiv,
             right: '571px',
@@ -26,18 +27,25 @@ export const Input = ({ setFile }: InputProps) => {
         </div >
         <div style={{
             ...commonStyleDiv,
-            right: '340px',
+            right: '348px',
             top: '69px'
         }} ><Icon svg={ArrowDown} /></div>
         <div style={{
             ...commonStyleDiv,
-            right: '368px',
+            right: '374px',
             top: '56px'
         }}>
             <Icon svg={Divider} />
         </div>
         {/* In this way you avoid showing the writing for the choice of the file */}
         <input type="file" id="selectedFile" style={{ display: 'none' }} onChange={(e) => setFile(e.target.files ? e.target.files[0] : undefined)} />
-        <input className='input-file' readOnly id='input' onClick={() => document.getElementById('selectedFile')?.click()} />
+        <Input style={{
+            width: "264px",
+            height: "48px",
+            background: "#FFFFFF",
+            borderRadius: "3px",
+            border: "0"
+        }}
+            readOnly={true}
+            onClick={() => document.getElementById('selectedFile')?.click()} />
     </Fragment >
-}

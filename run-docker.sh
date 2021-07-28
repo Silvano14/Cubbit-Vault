@@ -29,5 +29,6 @@ docker run \
 --ip 172.18.0.3 \
 --network vault-net \
 --rm \
+-d \
 cubbit \
 yarn start-app

@@ -4,7 +4,6 @@ import { DOWNLOAD, UPLOAD } from '../../redux/actions/action';
 import { FileProp } from '../../redux/reducers/reducer';
 import { Button, buttonProps } from '../../util/Button';
 import './Body.css';
-import { commonBtnStyle } from './const';
 import { DataFile } from './DataFile';
 import { Download } from './Download';
 import { DropZone } from './DropZone';
@@ -20,9 +19,7 @@ export const Body = () => {
     });
 
     const isDownload = useSelector((state: { download: boolean }) => {
-        if (state)
-            return state.download;
-        return false;
+        return !!state.download;
     });
 
     useEffect(() => {
@@ -52,14 +49,12 @@ export const Body = () => {
 
 const encryptBtn: buttonProps = {
     label: 'Encrypt and upload', style: {
-        ...commonBtnStyle,
         background: '#009EFF',
         marginRight: '24px',
     }
 };
 const decryptBtn: buttonProps = {
     label: 'Decrypt and download', style: {
-        ...commonBtnStyle,
         background: '#0065FF',
     }
 };

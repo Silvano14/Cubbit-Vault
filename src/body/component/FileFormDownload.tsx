@@ -3,7 +3,6 @@ import React, { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { REMOVE } from '../../redux/actions/action';
 import { Button } from '../../util/Button';
-import { commonBtnStyle } from '../container/const';
 import { webServerDomain } from '../container/DropFiles';
 import './FileFormDownload.css';
 
@@ -55,4 +54,4 @@ export const FileFormDownload = ({ fileName, size, id }: FileDownloaded) => {
 }
 
 
-export const formButtonStyle = { ...commonBtnStyle, backgroundColor: '#FFA047' }
+export const formButtonStyle = { backgroundColor: '#FFA047' }
