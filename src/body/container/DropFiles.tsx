@@ -5,7 +5,7 @@ import FileLogo from '../../icon/File-logo.svg';
 import { SAVE, UPDATE } from '../../redux/actions/action';
 import { FileProp } from '../../redux/reducers/reducer';
 import { Icon } from '../../util/Icon';
-import { Input } from '../component/Input';
+import { InputBrowsingExplorer } from '../component/InputBrowsingExplorer';
 import './DropFiles.css';
 
 export const webServerDomain = "http://localhost:3001";
@@ -74,7 +74,7 @@ export const DropFiles = () => {
                 <p>{file ? file.name : ""}</p>
             </div> :
             (<Fragment>
-                <Input setFile={setFile} />
+                <InputBrowsingExplorer setFile={setFile} />
                 <p className="text-drop">or drop file here</p>
             </Fragment>)
         }

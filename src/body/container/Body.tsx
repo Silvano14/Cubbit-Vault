@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DOWNLOAD, UPLOAD } from '../../redux/actions/action';
 import { FileProp } from '../../redux/reducers/reducer';
-import { Button, buttonProps } from '../../util/Button';
+import { Button, ButtonProps } from '../../util';
 import './Body.css';
-import { commonBtnStyle } from './const';
-import { DataFile } from './DataFile';
+import { DataFileUploaded } from './DataFileUploaded';
 import { Download } from './Download';
 import { DropZone } from './DropZone';
 
@@ -20,9 +19,7 @@ export const Body = () => {
     });
 
     const isDownload = useSelector((state: { download: boolean }) => {
-        if (state)
-            return state.download;
-        return false;
+        return !!state.download;
     });
 
     useEffect(() => {
@@ -37,7 +34,7 @@ export const Body = () => {
 
         {isDownload ? <Download />
             : showFileProps
-                ? <DataFile fileName={currentFile?.fileName || ""} keyValue={currentFile?.key || ""} id={currentFile?.id || ""} />
+                ? <DataFileUploaded fileName={currentFile?.fileName || ""} keyValue={currentFile?.key || ""} id={currentFile?.id || ""} />
                 : <div className='container-body'>
                     <DropZone />
                     <div className='container-button-actions'>
@@ -50,16 +47,14 @@ export const Body = () => {
     </div>
 }
 
-const encryptBtn: buttonProps = {
+const encryptBtn: ButtonProps = {
     label: 'Encrypt and upload', style: {
-        ...commonBtnStyle,
         background: '#009EFF',
         marginRight: '24px',
     }
 };
-const decryptBtn: buttonProps = {
+const decryptBtn: ButtonProps = {
     label: 'Decrypt and download', style: {
-        ...commonBtnStyle,
         background: '#0065FF',
     }
 };

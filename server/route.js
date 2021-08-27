@@ -13,8 +13,7 @@ async function routes(fastify, options) {
         const id = uuidv4();
         const key = uuidv4();
         var cipher = aes256.createCipher(key);
-        const mongodb = require('mongodb')
-        MongoClient.connect(DB_COONNECTION, function (err, db) {
+        MongoClient.connect(DB_COONNECTION, function(err, db) {
             if (err) throw err;
             var dbo = db.db("files");
 
@@ -23,7 +22,7 @@ async function routes(fastify, options) {
                 if (body) {
                     const { content, toSend, ...rest } = body;
                     var encryptedPlainText = cipher.encrypt(content);
-                    dbo.collection("files").insertOne({ content: encryptedPlainText, ...rest, _id: id }, function (err, res) {
+                    dbo.collection("files").insertOne({ content: encryptedPlainText, ...rest, _id: id }, function(err, res) {
                         if (err) throw err;
                         db.close();
                     });
@@ -33,9 +32,8 @@ async function routes(fastify, options) {
         return { id, key };
     })
 
-    fastify.get('/find/:id', async (request, reply) => {
-        const mongodb = require('mongodb')
-        MongoClient.connect(DB_COONNECTION, async function (err, db) {
+    fastify.get('/find/:id', async(request, reply) => {
+        MongoClient.connect(DB_COONNECTION, async function(err, db) {
             const result = await collection.findOne({ _id: request.params.id })
             reply.send(result);
             db.close();
@@ -43,12 +41,11 @@ async function routes(fastify, options) {
     })
 
     fastify.post('/download', (request, reply) => {
-        const mongodb = require('mongodb')
         var cipher = aes256.createCipher(request.body.key);
 
-        MongoClient.connect(DB_COONNECTION, async function (err, db) {
+        MongoClient.connect(DB_COONNECTION, async function(err, db) {
             const result = await collection.findOne({ _id: request.body.id })
-            fs.writeFile(`public/${result.fileName}`, cipher.decrypt(result.content), function (err) {
+            fs.writeFile(`public/${result.fileName}`, cipher.decrypt(result.content), function(err) {
                 if (err) throw err;
             });
             reply
