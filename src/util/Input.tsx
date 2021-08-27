@@ -1,17 +1,15 @@
-import React, { CSSProperties, Fragment } from 'react';
+import React, { CSSProperties } from 'react';
 
-export type InputProp = {
-    style?: CSSProperties
-    className?: string
-    id?: string
-    onChange?: Function
-    onClick?: Function
-    label?: boolean
-    readOnly?: boolean
-    textLabel?: string
-    value?: string
+export interface InputPropI {
+    styleInput?: CSSProperties
+    classNameInput?: string
+    idInput?: string
+    onChangeInput?: Function
+    onClickInput?: Function
+    showLabel?: boolean
+    readOnlyInput?: boolean
+    valueInput?: string
 }
-
 
 const inputStyle: CSSProperties = {
     background: "#292929",
@@ -28,14 +26,13 @@ const inputStyle: CSSProperties = {
     fontWeight: "bold"
 }
 
-export const Input = ({ onChange = () => { }, onClick = () => { }, style, className = "", id, label, textLabel, readOnly = false, value }: InputProp) =>
-    <Fragment>
-        {label ? <label htmlFor={id} >{textLabel} </label> : <></>}
-        <input readOnly={readOnly}
-            value={value}
-            id={id}
-            onClick={() => onClick()}
-            onChange={() => onChange()}
-            className={`${className}`}
-            style={{ ...inputStyle, ...style }} />
-    </Fragment>
+export const Input = (props: InputPropI) =>
+    <input
+        readOnly={props.readOnlyInput}
+        value={props.valueInput}
+        id={props.idInput}
+        onClick={() => props.onClickInput ? props.onClickInput() : {}}
+        onChange={(e) => props.onChangeInput ? props.onChangeInput(e.target.value) : {}}
+        className={props.classNameInput}
+        style={{ ...inputStyle, ...props.styleInput }}
+    />

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-export type buttonProps = {
+export type ButtonProps = {
     label: string,
     style?: React.CSSProperties,
     onClick?: any
@@ -21,7 +21,11 @@ export const commonBtnStyle: React.CSSProperties = {
     cursor: 'pointer'
 }
 
+<<<<<<< HEAD
 export const Button = ({ style, label, onClick, id }: buttonProps) =>
+=======
+export const Button = ({ style, label, onClick, id }: ButtonProps) =>
+>>>>>>> feature/refactoring-input
     <Fragment>
         <button style={{ ...commonBtnStyle, ...style }} onClick={onClick} id={id}>
             {label}

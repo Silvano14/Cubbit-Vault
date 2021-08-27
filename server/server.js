@@ -1,5 +1,4 @@
 const DB_COONNECTION = require('./const');
-const cors = require('cors')
 var path = require('path');
 
 const fastify = require('fastify')({
@@ -23,11 +22,10 @@ fastify.register(require('./db-connector'), {
 
 fastify.register(require('./route'))
 
-fastify.listen(3001, '0.0.0.0', function (err, address) {
+fastify.listen(3001, '0.0.0.0', function(err, address) {
     if (err) {
         fastify.log.error(err)
         process.exit(1)
     }
     fastify.log.info(`server listening on ${address}`)
 })
-
