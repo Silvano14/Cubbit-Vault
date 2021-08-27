@@ -42,7 +42,7 @@ export const DataFile = ({ id, keyValue, fileName }: KeysFile) => {
             bottom: '-42px'
         }}
             onClick={() => copyTextInCLipboard(keyValue, "btn-key")} />
-        <Input readOnly={true} className={"key"} value={keyValue} />
+        <Input readOnlyInput={true} classNameInput={"key"} valueInput={keyValue} />
         <Button style={{ background: '#009EFF', marginTop: '50px' }} label={"Go to download"} onClick={() => dispatch({ type: DOWNLOAD, payload: true })} />
     </Fragment>
 }

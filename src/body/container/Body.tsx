@@ -4,11 +4,7 @@ import { DOWNLOAD, UPLOAD } from '../../redux/actions/action';
 import { FileProp } from '../../redux/reducers/reducer';
 import { Button, ButtonProps } from '../../util';
 import './Body.css';
-<<<<<<< HEAD
-import { DataFile } from './DataFile';
-=======
 import { DataFileUploaded } from './DataFileUploaded';
->>>>>>> feature/refactoring-input
 import { Download } from './Download';
 import { DropZone } from './DropZone';
 
