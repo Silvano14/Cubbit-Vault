@@ -8,11 +8,11 @@ const labelStyle: CSSProperties = {
     fontFamily: "Nunito"
 }
 
-export interface LabelPropI {
+export type LabelProp = {
     classNameLbl?: string
     textLbl?: string
     htmlForLbl?: string
     styleLbl?: CSSProperties
 }
 
-export const Label = (props: LabelPropI) => <label htmlFor={props.htmlForLbl} className={props.classNameLbl} style={{ ...labelStyle, ...props.styleLbl }}>{props.textLbl}</label>
+export const Label = (props: LabelProp) => <label htmlFor={props.htmlForLbl} className={props.classNameLbl} style={{ ...labelStyle, ...props.styleLbl }}>{props.textLbl}</label>

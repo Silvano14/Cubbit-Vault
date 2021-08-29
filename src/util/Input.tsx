@@ -1,14 +1,14 @@
 import React, { CSSProperties } from 'react';
 
-export interface InputPropI {
-    styleInput?: CSSProperties
-    classNameInput?: string
-    idInput?: string
-    onChangeInput?: Function
-    onClickInput?: Function
-    showLabel?: boolean
-    readOnlyInput?: boolean
-    valueInput?: string
+export type InputProp = {
+    readonly styleInput?: CSSProperties
+    readonly classNameInput?: string
+    readonly idInput?: string
+    onChangeInput?(e: string): void
+    onClickInput?(): void
+    readonly showLabel?: boolean
+    readonly readOnlyInput?: boolean
+    readonly valueInput?: string 
 }
 
 const inputStyle: CSSProperties = {
@@ -20,13 +20,12 @@ const inputStyle: CSSProperties = {
     width: "552px",
     textOverflow: "ellipsis",
     paddingLeft: "30px",
-    paddingRight: "148px",
     color: "white",
     fontFamily: "Nunito",
     fontWeight: "bold"
 }
 
-export const Input = (props: InputPropI) =>
+export const Input = (props: InputProp) =>
     <input
         readOnly={props.readOnlyInput}
         value={props.valueInput}

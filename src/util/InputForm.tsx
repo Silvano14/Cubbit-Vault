@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
-import { Input, InputPropI } from './Input';
-import { Label, LabelPropI } from './Label';
+import { Input, InputProp } from './Input';
+import { Label, LabelProp } from './Label';
 
-export interface InputFormPropI extends LabelPropI, InputPropI {
-}
+export type InputFormProp = LabelProp & InputProp;
 
-export const InputForm = (props: InputFormPropI) =>
+export const InputForm = (props: InputFormProp) =>
     <Fragment>
         {props.showLabel
             ? <Label
@@ -19,7 +18,7 @@ export const InputForm = (props: InputFormPropI) =>
             valueInput={props.valueInput}
             idInput={props.idInput}
             onClickInput={() => props.onClickInput ? props.onClickInput() : {}}
-            onChangeInput={() => props.onChangeInput ? props.onChangeInput() : {}}
+            onChangeInput={(e) => props.onChangeInput ? props.onChangeInput(e) : {}}
             classNameInput={props.classNameInput}
             styleInput={{ ...props.styleInput }}
         />
