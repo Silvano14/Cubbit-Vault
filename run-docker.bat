@@ -1,6 +1,8 @@
 @REM docker network create --subnet=172.18.0.0/16 vault-net
 @REM docker pull mongo
 
+@REM docker volume create cubbit-volume
+
 @REM docker build ^
 @REM -t cubbit ^
 @REM -f docker/Dockerfile ^
@@ -12,7 +14,7 @@ docker run ^
 --ip 172.18.0.2 ^
 --name mongodb ^
 --network vault-net ^
--v %cd%/mongodb/data:/data/db ^
+-v cubbit-volume:/data/db ^
 --rm ^
 mongo
 

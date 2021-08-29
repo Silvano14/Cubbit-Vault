@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 export type ButtonProps = {
-    label: string,
+    readonly label: string,
     style?: React.CSSProperties,
     onClick?: any
     id?: string

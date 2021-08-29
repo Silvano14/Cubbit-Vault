@@ -32,9 +32,10 @@ export const Body = () => {
     return <div className='container-body'>
         <p className={"p-header"}>`4!!(3=s 4+3</p>
 
-        {isDownload ? <Download />
+        {isDownload 
+        ? <Download />
             : showFileProps
-                ? <DataFileUploaded fileName={currentFile?.fileName || ""} keyValue={currentFile?.key || ""} id={currentFile?.id || ""} />
+                ? <DataFileUploaded fileName={currentFile?.fileName ?? ""} keyValue={currentFile?.key ?? ""} id={currentFile?.id ?? ""} />
                 : <div className='container-body'>
                     <DropZone />
                     <div className='container-button-actions'>

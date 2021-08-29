@@ -1,8 +1,8 @@
 import React from 'react';
 
 export type IconProp = {
-    svg: string
-    style?: React.CSSProperties
+    readonly svg: string
+    readonly style?: React.CSSProperties
 }
 
 export const Icon = ({ svg, style }: IconProp) =>
