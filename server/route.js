@@ -33,6 +33,7 @@ async function routes(fastify, options) {
     })
 
     fastify.get('/find/:id', async(request, reply) => {
+        console.log('ciao!!');
         MongoClient.connect(DB_COONNECTION, async function(err, db) {
             const result = await collection.findOne({ _id: request.params.id })
             reply.send(result);

@@ -2,8 +2,7 @@ import React, { Dispatch, Fragment, SetStateAction } from 'react';
 import ArrowDown from '../../icon/ArrowDown.svg';
 import Divider from '../../icon/Divider.svg';
 import FileLogo from '../../icon/File-logo.svg';
-import { Icon } from '../../util/Icon';
-import { InputForm } from '../../util';
+import { InputForm, Icon } from '../../util/components';
 import './InputBrowsingExplorer.css';
 
 export type InputBrowsingExplorerProps = {

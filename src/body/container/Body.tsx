@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DOWNLOAD, UPLOAD } from '../../redux/actions/action';
 import { FileProp } from '../../redux/reducers/reducer';
-import { Button, ButtonProps } from '../../util';
+import { Button, ButtonProps } from '../../util/components';
 import './Body.css';
 import { DataFileUploaded } from './DataFileUploaded';
 import { Download } from './Download';

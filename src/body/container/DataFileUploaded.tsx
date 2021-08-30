@@ -2,9 +2,7 @@ import React, { CSSProperties, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import FileLogo from '../../icon/File-logo-white.svg';
 import { DOWNLOAD } from '../../redux/actions/action';
-import { Button } from '../../util';
-import { Icon } from '../../util/Icon';
-import { InputForm } from '../../util';
+import { Button, InputForm, Icon } from '../../util/components';
 import './DataFileUploaded.css';
 
 type KeysFile = {

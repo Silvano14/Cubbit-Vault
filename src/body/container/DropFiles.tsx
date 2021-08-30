@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FileLogo from '../../icon/File-logo.svg';
 import { SAVE, UPDATE } from '../../redux/actions/action';
 import { FileProp } from '../../redux/reducers/reducer';
-import { Icon } from '../../util/Icon';
+import { Icon } from '../../util/components';
 import { InputBrowsingExplorer } from '../component/InputBrowsingExplorer';
 import './DropFiles.css';
 

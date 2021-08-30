@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
-import { Button, InputForm } from '../../util';
+import { Button, InputForm } from '../../util/components';
 import { webServerDomain } from '../container/DropFiles';
 import { FileDownloaded, FileFormDownload, formButtonStyle } from './FileFormDownload';
 import './IdFileForm.css';

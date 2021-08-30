@@ -2,9 +2,7 @@ import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import FileLogo from '../../icon/File-logo-white.svg';
 import { DOWNLOAD } from '../../redux/actions/action';
-import { Button } from '../../util/Button';
-import { Icon } from '../../util/Icon';
-import { Input } from '../../util/Input';
+import { Button, Icon, InputForm } from '../../util/components';
 import './DataFile.css';
 
 type KeysFile = {
@@ -42,7 +40,7 @@ export const DataFile = ({ id, keyValue, fileName }: KeysFile) => {
             bottom: '-42px'
         }}
             onClick={() => copyTextInCLipboard(keyValue, "btn-key")} />
-        <Input readOnlyInput={true} classNameInput={"key"} valueInput={keyValue} />
+        <InputForm readOnlyInput={true} classNameInput={"key"} valueInput={keyValue} />
         <Button style={{ background: '#009EFF', marginTop: '50px' }} label={"Go to download"} onClick={() => dispatch({ type: DOWNLOAD, payload: true })} />
     </Fragment>
 }
